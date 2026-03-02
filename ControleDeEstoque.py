@@ -8,7 +8,7 @@ Desenvolver um sistema simples de controle de estoque em Python,
 com funcionalidade de entrada e saída de produtos, Conforme a História de Usuário fornecida.
 '''
 
-#Biblioteca para registrar a data de entrada
+#Biblioteca para registrar a data/hora de entrada
 from datetime import datetime
 
 #Estoque vai começar vazio e será inclementado
@@ -128,7 +128,7 @@ def ver_movimentacoes():
 #Criando o menu para o funcionário (Main)
 while True:
     print("\nHavyner Jalles Siqueira RU: 5079616")
-    print("BEN-VINDO AO CONTROLE DE ESTOQUE")
+    print("BEM-VINDO AO CONTROLE DE ESTOQUE")
     print("1 - CADASTRAR PRODUTO")
     print("2 - ENTRADA DE PRODUTO")
     print("3 - SAÍDA DE PRODUTO")
