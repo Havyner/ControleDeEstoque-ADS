@@ -70,7 +70,7 @@ def saida_produto():
         return
     #Verificando se a quantidade informada é mior q zero
     try:
-        qnt = int(input("\nInforme a quantidade que deseja retirar: "))
+        qnt = int(input("Informe a quantidade que deseja retirar: "))
         if qnt <= 0:
             print("Quantidade deve ser maior que zero!\n")
             return
@@ -113,9 +113,18 @@ def ver_estoque():
 
 
 def ver_movimentacoes():
-    print("ok")
+    print("-"*33)
+    print("-"*9, "MOVIMENTAÇÕES", "-"*9)
 
+    #Verificando se tem movimentações
+    if not movimentacaoList:
+        print("Nenhuma movimentação registrada!\n")
+    else:
+        for mov in movimentacaoList:
+            print(f"{mov['Tipo']} | {mov['Produto']} | {mov['Quantidade']} | {mov['Data']} | {mov['Responsável']}")
 
+    print("-"*33)
+    
 #Criando o menu para o funcionário (Main)
 while True:
     print("\nHavyner Jalles Siqueira RU: 5079616")
@@ -137,13 +146,13 @@ while True:
             saida_produto()
         elif op == "4":
             ver_estoque()
-        elif op == 5:
+        elif op == "5":
             ver_movimentacoes()
         elif op == "0":
             print("Obrigado!!")
             break
         else:
-            print("Opção inválida!")
+            print("Opção inválida!\n")
      
     except ValueError:
         print("Valor inválido, tente novamente!\n")
