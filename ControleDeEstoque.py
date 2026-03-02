@@ -22,25 +22,25 @@ def cadastrar_produto():
 
     #Verificando se o produto já esta cadastrado
     if nome_produto in estoque:
-        print("\nProduto já cadastrado!")
+        print("Produto já cadastrado!\n")
     else:
         #cadastrando produto novo no estoque
         estoque[nome_produto] = 0
-        print("\nProduto cadastrado com sucesso!")
+        print("Produto cadastrado com sucesso!\n")
 
 def entrada_produto():
     nome_produto = input("\nInforme o nome do produto: ").lower()
 
     #verificando se possui o produto em estoque
     if nome_produto not in estoque:
-        print("Produto não encontrado!")
+        print("Produto não encontrado!\n")
         return
     
     try:
         qnt = int(input("Informe a quantidade de entrada do produto: "))
         #Verificar se a quantidade é válida
         if qnt <= 0:
-            print("\nQuantidade deve ser maior que zero")
+            print("Quantidade deve ser maior que zero\n")
             return
     except ValueError:
         print("\nDigite um número válido!")
@@ -54,20 +54,62 @@ def entrada_produto():
 
     movimentacaoList.append({
         "Tipo" : "Entrada",
-        "produto" : nome_produto,
+        "Produto" : nome_produto,
         "Quantidade" : qnt,
         "Data" : data,
         "Responsável" : funcionario   
     })
 
-    print("Registro realizado com sucesso!")
+    print("Registro realizado com sucesso!\n")
 
 def saida_produto():
-    print("ok")
+    nome_produto = input("\nInforme o nome do produto: ").lower()
+    #Verificando se possui o produto em estoque
+    if nome_produto not in estoque:
+        print("Produto não encontrado!\n")
+        return
+    #Verificando se a quantidade informada é mior q zero
+    try:
+        qnt = int(input("\nInforme a quantidade que deseja retirar: "))
+        if qnt <= 0:
+            print("Quantidade deve ser maior que zero!\n")
+            return
+    except ValueError:
+        print("Digite um número válido!\n")
+        return
+    #Verificanado se a quantidade esta disponível em estoque
+    if qnt > estoque[nome_produto]:
+        print("Estoque insuficiente!\n")
+        return
+    
+    #Registrando saida
+    data = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    funcionario = input("Digite o nome do Funcionário responsável: ").lower()
+
+    estoque[nome_produto] -= qnt
+
+    movimentacaoList.append({
+        "Tipo" : "Saída",
+        "Produto" : nome_produto,
+        "Quantidade" : qnt,
+        "Data" : data,
+        "Responsável" : funcionario   
+    })
+
+    print("Registro realizado com sucesso!\n")
 
 
 def ver_estoque():
-    print("ok")
+    print("-"*33)
+    print("-"*12, "ESTOQUE", "-"*12)
+
+    #Verificar se estoque ta vazio
+    if not estoque:
+        print("Estoque vazio!\n")
+    else:
+        for Produto, Quantidade in estoque.items():
+            print(f"{Produto} : {Quantidade}")
+    print("-"*33)
 
 
 def ver_movimentacoes():
@@ -76,7 +118,7 @@ def ver_movimentacoes():
 
 #Criando o menu para o funcionário (Main)
 while True:
-    print("Havyner Jalles Siqueira RU: 5079616\n")
+    print("\nHavyner Jalles Siqueira RU: 5079616")
     print("BEN-VINDO AO CONTROLE DE ESTOQUE")
     print("1 - CADASTRAR PRODUTO")
     print("2 - ENTRADA DE PRODUTO")
@@ -104,4 +146,4 @@ while True:
             print("Opção inválida!")
      
     except ValueError:
-        print("Valor inválido, tente novamente!")
+        print("Valor inválido, tente novamente!\n")
